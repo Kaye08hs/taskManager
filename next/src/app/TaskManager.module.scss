@@ -1,0 +1,104 @@
+$color-primary: #007bff;
+$color-danger: #dc3545;
+$color-border: #ccc;
+$color-background-light: #f8f9fa;
+
+// Status Colors
+$status-pending: #ffc107;
+$status-in-progress: #0dcaf0;
+$status-completed: #28a745;
+
+
+// The main container for our app
+.container {
+    max-width: 700px;
+    margin: 20px auto; // Center the container on the page
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.title {
+    text-align: center;
+    color: #d2c4c4;
+}
+
+// Styling for the form where you add tasks
+.form {
+    background-color: $color-background-light;
+    padding: 20px;
+    border: 1px solid $color-border;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    color: #d13434;
+}
+
+// Common styles for input fields and text areas
+.input, .textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+// Basic button styling
+.button {
+    padding: 10px 15px;
+    border: none;
+    background-color: $color-primary;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+// A container for the list of tasks
+.taskList {
+    margin-top: 20px;
+}
+
+// Styling for each individual task item
+.taskItem {
+    padding: 15px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #56dc35;
+
+    // Use a different left border color based on status
+    &.pending {
+        border-left: 4px solid $status-pending;
+    }
+    &.in-progress {
+        border-left: 4px solid $status-in-progress;
+    }
+    &.completed {
+        border-left: 4px solid $status-completed;
+    }
+}
+
+.taskItem h3 {
+    margin-top: 0;
+}
+
+// A container for the action buttons inside each task
+.taskActions {
+    margin-top: 15px;
+    
+    // Add some space between the buttons
+    button, select {
+        margin-right: 10px;
+    }
+}
+
+.deleteButton {
+    background-color: $color-danger;
+}
+
+// A simple dropdown menu
+.select {
+    padding: 8px;
+    border-radius: 4px;
+}
