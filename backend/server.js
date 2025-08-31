@@ -1,46 +1,34 @@
-// --- Imports ---
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const taskRoute = require('./src/routes/taskRoute');
+// server.js
+const express = require('express')
+const cors = require('cors')
+const taskRoute = require('./src/routes/taskRoute')
+const connectDB = require('./src/config/db')
 
-// --- Configuration ---
-// Load environment variables from .env file
-dotenv.config();
+require('dotenv').config()
+// const app = require('./app') // This line is likely a duplicate or from a different pattern. Remove it.
 
-// --- Initializations ---
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express(); // This is the correct initialization
 
-// --- Middleware ---
-// To parse JSON bodies from incoming requests
-app.use(express.json());
+// Connect to Database
+connectDB();
 
-// --- Database Connection ---
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('Successfully connected to MongoDB!');
-    // Start the server only after a successful DB connection
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('Database connection error:', err);
-    process.exit(1); // Exit the process if DB connection fails
-  });
+// Middlewares
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
-// --- Routes ---
-// Base route for health check
-app.get('/', (req, res) => {
-  res.send('Task Manager API is running...');
-});
+// API Routes
+app.use('/api', taskRoute)
 
-// Use the task routes for any request to /api/tasks
-app.use('/api/tasks', taskRoute);
+// Welcome Route
+app.get('/', (req, res)=>{
+    res.send('Welcome to the Task Manager API')
+})
 
-// --- Error Handling Middleware (Optional but Recommended) ---
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+const PORT = process.env.PORT || 8000 // A different port like 8000 is common for backend servers
+
+app.listen(PORT, ()=>{
+    console.log(`The server is running on port: ${PORT}`)
+})
+
+module.exports = app;

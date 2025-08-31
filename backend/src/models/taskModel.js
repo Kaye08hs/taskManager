@@ -1,29 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-// Define the schema for the Task model
-const taskSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, 'Task title is required'], // Custom error message
-    trim: true, // Removes whitespace from both ends
-    maxlength: [100, 'Title cannot be more than 100 characters']
-  },
-  description: {
-    type: String,
-    trim: true,
-    maxlength: [500, 'Description cannot be more than 500 characters']
-  },
-  completed: {
-    type: Boolean,
-    default: false // A new task is not completed by default
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now // Sets the creation date automatically
-  }
-});
+const TaskSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        required: [true, 'Please provide a title for the task'],
+        trim:true
+    },
+    description:{
+        type:String,
+        required: [true, 'Please provide a description for the task'],
+        trim:true
+    },
+    status :{ // Renamed from task_status for clarity
+        type: String,
+        enum: ['pending', 'in-progress', 'completed'],
+        default: 'pending'
+    }
+}, {timestamps:true}) /**this will automatically adds createdAt and updatedAt */
 
-// Create the model from the schema and export it
-const Task = mongoose.model('Task', taskSchema);
-
-module.exports = Task;
+module.exports = mongoose.model('Task', TaskSchema)
