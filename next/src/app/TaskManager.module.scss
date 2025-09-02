@@ -3,102 +3,248 @@ $color-danger: #dc3545;
 $color-border: #ccc;
 $color-background-light: #f8f9fa;
 
-// Status Colors
 $status-pending: #ffc107;
 $status-in-progress: #0dcaf0;
 $status-completed: #28a745;
 
 
-// The main container for our app
+.header {
+  background-color: #590202; 
+  color: white;
+  padding: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  border-bottom: 5px solid #ffda0a;
+}
+
 .container {
-    max-width: 700px;
-    margin: 20px auto; // Center the container on the page
-    padding: 20px;
-    font-family: sans-serif;
+  min-height: calc(100vh - 72px);
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  background: #d9cccc;
 }
 
-.title {
-    text-align: center;
-    color: #d2c4c4;
+.mainGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 20px;
+  width: 100%;
 }
 
-// Styling for the form where you add tasks
-.form {
-    background-color: $color-background-light;
-    padding: 20px;
-    border: 1px solid $color-border;
-    border-radius: 5px;
-    margin-bottom: 30px;
-    color: #d13434;
-}
-
-// Common styles for input fields and text areas
-.input, .textarea {
+.leftPane {
+    background-color: #590202;
+    padding: 25px;
+    border-radius: 28px;
+    max-width: 450px;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid $color-border;
-    border-radius: 4px;
-    font-size: 16px;
+    color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    margin: auto;
+    min-height: 360px;
+    height: auto;
 }
 
-// Basic button styling
-.button {
-    padding: 10px 15px;
-    border: none;
-    background-color: $color-primary;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  margin-top: 5px;
 }
 
-// A container for the list of tasks
+.inputGroup label {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    font-family: system-ui;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #444;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #000;           
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.4);
+}
+
+.inputGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff990a;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+  background-color: #b26903;
+}
+
+
+.rightPane {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #590202;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000; 
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color:#da3036; 
+}
+
+.select {
+  padding: 10px 14px;
+  border: 2px solid #590202;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #da3036;
+}
+
+
 .taskList {
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-// Styling for each individual task item
-.taskItem {
-    padding: 15px;
-    border: 1px solid $color-border;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    color: #56dc35;
-
-    // Use a different left border color based on status
-    &.pending {
-        border-left: 4px solid $status-pending;
-    }
-    &.in-progress {
-        border-left: 4px solid $status-in-progress;
-    }
-    &.completed {
-        border-left: 4px solid $status-completed;
-    }
+.taskCard {
+  background: #fff;
+  padding: 16px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 7px solid #590202;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: Arial, sans-serif;
 }
 
-.taskItem h3 {
-    margin-top: 0;
+.taskCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #590202;
+}
+.taskCard p {
+  color: #000; 
+  font-size: 14px; 
+  line-height: 1.4; 
+}
+.taskCard h3,
+.taskCard p {
+  font-family: 'Arial', sans-serif; 
+}
+.status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
-// A container for the action buttons inside each task
+.status.pending {
+  background: #ffeeba;
+  color: #856404;
+}
+.status.in-progress {
+  background: #bee5eb;
+  color: #0c5460;
+}
+.status.completed {
+  background: #c3e6cb;
+  color: #155724;
+}
+
 .taskActions {
-    margin-top: 15px;
-    
-    // Add some space between the buttons
-    button, select {
-        margin-right: 10px;
-    }
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+.startButton {
+  background-color: pink;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.startButton:hover {
+  background-color: hotpink;
+  color: white;
+}
+
+.endButton {
+  background-color: skyblue;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.endButton:hover {
+  background-color: deepskyblue;
+  color: white;
 }
 
 .deleteButton {
-    background-color: $color-danger;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-// A simple dropdown menu
-.select {
-    padding: 8px;
-    border-radius: 4px;
+.deleteButton:hover {
+  background-color: darkred;
 }
