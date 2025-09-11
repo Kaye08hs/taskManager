@@ -5,7 +5,7 @@ const connectDB = require('./src/config/db')
 
 require('dotenv').config()
 
-const app = express(); // This is the correct initialization
+const app = express();
 
 // Connect to Database
 connectDB();

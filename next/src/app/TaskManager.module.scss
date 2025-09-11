@@ -1,22 +1,24 @@
-$color-primary: #007bff;
+$color-primary: #ff990a;
+$color-secondary: #ffda0a;
 $color-danger: #dc3545;
+$color-dark: #590202;
 $color-border: #ccc;
 $color-background-light: #f8f9fa;
+$color-gray: #6c757d;
 
 $status-pending: #ffc107;
 $status-in-progress: #0dcaf0;
 $status-completed: #28a745;
 
-
 .header {
-  background-color: #590202; 
+  background-color: $color-dark;
   color: white;
   padding: 20px;
   font-size: 30px;
   font-weight: bold;
   display: flex;
   align-items: center;
-  border-bottom: 5px solid #ffda0a;
+  border-bottom: 5px solid $color-secondary;
 }
 
 .container {
@@ -35,16 +37,16 @@ $status-completed: #28a745;
 }
 
 .leftPane {
-    background-color: #590202;
-    padding: 25px;
-    border-radius: 28px;
-    max-width: 450px;
-    width: 100%;
-    color: #fff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    margin: auto;
-    min-height: 360px;
-    height: auto;
+  background-color: $color-dark;
+  padding: 25px;
+  border-radius: 28px;
+  max-width: 450px;
+  width: 100%;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  margin: auto;
+  min-height: 360px;
+  height: auto;
 }
 
 .inputGroup {
@@ -55,11 +57,11 @@ $status-completed: #28a745;
 }
 
 .inputGroup label {
-    margin-bottom: 0.5rem;
-    font-size: 16px;
-    color: #fff;
-    font-weight: 700;
-    font-family: system-ui;
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+  font-family: system-ui;
 }
 
 .inputGroup input,
@@ -69,15 +71,15 @@ $status-completed: #28a745;
   border-radius: 0.6rem;
   font-size: 1rem;
   background-color: #fff;
-  color: #000;           
+  color: #000;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .inputGroup input:focus,
 .inputGroup textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 6px rgba(0,123,255,0.4);
+  border-color: $color-primary;
+  box-shadow: 0 0 6px rgba($color-primary, 0.4);
 }
 
 .inputGroup textarea {
@@ -91,7 +93,7 @@ $status-completed: #28a745;
   font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  background-color: #ff990a;
+  background-color: $color-primary;
   border: none;
   border-radius: 0.6rem;
   cursor: pointer;
@@ -99,9 +101,8 @@ $status-completed: #28a745;
 }
 
 .submitBtn:hover {
-  background-color: #b26903;
+  background-color: darken($color-primary, 10%);
 }
-
 
 .rightPane {
   display: flex;
@@ -117,22 +118,22 @@ $status-completed: #28a745;
 .input {
   flex: 1;
   padding: 10px 14px;
-  border: 2px solid #590202;
+  border: 2px solid $color-dark;
   border-radius: 8px;
   font-size: 14px;
-  color: #000; 
+  color: #000;
   background: #fff;
   transition: border-color 0.2s;
 }
 
 .input:focus {
   outline: none;
-  border-color:#da3036; 
+  border-color: $color-danger;
 }
 
 .select {
   padding: 10px 14px;
-  border: 2px solid #590202;
+  border: 2px solid $color-dark;
   border-radius: 8px;
   font-size: 14px;
   color: #000;
@@ -142,9 +143,8 @@ $status-completed: #28a745;
 
 .select:focus {
   outline: none;
-  border-color: #da3036;
+  border-color: $color-danger;
 }
-
 
 .taskList {
   display: flex;
@@ -158,7 +158,7 @@ $status-completed: #28a745;
   margin-bottom: 5px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-left: 7px solid #590202;
+  border-left: 7px solid $color-dark;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   font-family: Arial, sans-serif;
 }
@@ -167,84 +167,148 @@ $status-completed: #28a745;
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
+
 .taskHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #590202;
+  color: $color-dark;
 }
+
 .taskCard p {
-  color: #000; 
-  font-size: 14px; 
-  line-height: 1.4; 
+  color: #000;
+  font-size: 14px;
+  line-height: 1.4;
 }
+
 .taskCard h3,
 .taskCard p {
-  font-family: 'Arial', sans-serif; 
+  font-family: "Arial", sans-serif;
 }
+
 .status {
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 12px;
   font-size: 0.8rem;
   font-weight: bold;
+  color: #fff;
   text-transform: capitalize;
 }
 
 .status.pending {
-  background: #ffeeba;
-  color: #856404;
+  background: $status-pending;
+  color: darken($status-pending, 40%);
 }
+
 .status.in-progress {
-  background: #bee5eb;
-  color: #0c5460;
+  background: $status-in-progress;
+  color: darken($status-in-progress, 40%);
 }
+
 .status.completed {
-  background: #c3e6cb;
-  color: #155724;
+  background: $status-completed;
+  color: #fff;
 }
 
 .taskActions {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   gap: 10px;
-}
-.startButton {
-  background-color: pink;
-  color: black;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+  flex-wrap: wrap;
+
+  button {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
-.startButton:hover {
-  background-color: hotpink;
-  color: white;
+.startButton {
+  background-color: $status-in-progress;
+  color: darken($status-in-progress, 40%);
+  &:hover {
+    background-color: darken($status-in-progress, 10%);
+  }
 }
 
 .endButton {
-  background-color: skyblue;
-  color: black;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+  background-color: $status-completed;
+  color: #fff;
+  &:hover {
+    background-color: darken($status-completed, 10%);
+  }
 }
 
-.endButton:hover {
-  background-color: deepskyblue;
-  color: white;
+.editButton {
+  background-color: $color-primary;
+  color: #fff;
+  &:hover {
+    background-color: darken($color-primary, 10%);
+  }
 }
 
 .deleteButton {
-  background-color: red;
+  background-color: $color-danger;
   color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+  &:hover {
+    background-color: darken($color-danger, 10%);
+  }
 }
 
-.deleteButton:hover {
-  background-color: darkred;
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .input,
+  .textarea {
+    padding: 0.8rem 1rem;
+    border: 1px solid $color-border;
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #000;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 6px rgba($color-primary, 0.4);
+    }
+  }
+
+  .textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+.editActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.saveButton {
+  background-color: $status-completed;
+  color: #fff;
+  &:hover {
+    background-color: darken($status-completed, 10%);
+  }
+}
+
+.cancelButton {
+  background-color: $color-gray;
+  color: #fff;
+  &:hover {
+    background-color: darken($color-gray, 10%);
+  }
 }

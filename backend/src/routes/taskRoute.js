@@ -17,7 +17,6 @@ router.patch('/v1/task/:task_id', taskController.updateTaskById)
 // Delete a task by its ID
 router.delete('/v1/task/:task_id', taskController.deleteTaskById)
 
-// The route below is now deprecated and removed.
 // router.put('/v1/task/:task_id', taskController.markTaskAsComplete)
 
 module.exports = router
