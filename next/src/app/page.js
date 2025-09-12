@@ -74,7 +74,11 @@ export default function HomePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, description }),
       });
-      if (!res.ok) throw new Error('Failed to create task');
+      if (!res.ok) {
+        const errorData = await res.json(); 
+         throw new Error(errorData.message || 'An unknown error occurred.');
+      }
+      
       setTitle('');
       setDescription('');
       fetchTasks();
@@ -85,7 +89,13 @@ export default function HomePage() {
         timer: 1500
       });
     } catch (err) {
-      setError(err.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: err.message,
+        confirmButtonColor: '#590202',
+        confirmButtonText: 'Okay'
+      })
     }
   };
 

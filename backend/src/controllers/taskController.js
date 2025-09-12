@@ -5,9 +5,7 @@ exports.createTask = async (req, res)=> {
     try{
         const { title, description } = req.body;
 
-        if (!title || !description) {
-            return res.status(400).json({ message: "Title and description are required" });
-        }
+        validateRequest(req.body, ['title', 'description']);
 
         const task = new Task({
             title,
@@ -24,7 +22,10 @@ exports.createTask = async (req, res)=> {
 
     }catch(error){
         console.log(error)
-        res.status(500).json({ // 500 for server errors
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }
+        res.status(500).json({
             message: error.message
         })
     }
@@ -43,7 +44,7 @@ exports.getAllTask = async (req, res) => {
             if (allowedStatuses.includes(status)) {
                 query.status = status;
             } else {
-                return res.status(400).json({ message: `Invalid status value. Allowed values are: ${allowedStatuses.join(', ')}` });
+               throw new HttpError(`Invalid status value. Allowed values are: ${allowedStatuses.join(', ')}`, 400);
             }
         }
 
@@ -64,6 +65,9 @@ exports.getAllTask = async (req, res) => {
 
     } catch(error) {
         console.log(error);
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }
         res.status(500).json({
             message: error.message
         });
@@ -77,9 +81,7 @@ exports.getTaskById = async (req, res) => {
         const task = await Task.findById(req.params.task_id)
 
         if(!task) {
-            return res.status(404).json({ // Add return to stop execution
-                message: "Task not found"
-            })
+             throw new HttpError("Task not found", 404);
         }
 
         res.status(200).json({
@@ -87,6 +89,9 @@ exports.getTaskById = async (req, res) => {
         })
     }catch(error){
         console.log(error)
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }
         res.status(500).json({
             message: error.message
         })
@@ -98,8 +103,9 @@ exports.updateTaskById = async (req, res) => {
     try{
         const updatedData = req.body
 
-        // Optional: Prevent users from updating certain fields directly if needed
-        // For example: delete updatedData.createdAt;
+    if (Object.keys(updatedData).length === 0) {
+            throw new HttpError("Request body cannot be empty for an update.", 400);
+        }
 
         const updated_task = await Task.findByIdAndUpdate(
             req.params.task_id,
@@ -111,9 +117,7 @@ exports.updateTaskById = async (req, res) => {
         )
 
         if(!updated_task){
-            return res.status(404).json({
-                message: "Task not found and unable to update it"
-            })
+            throw new HttpError("Task not found and was not updated", 404);
         }
 
         res.status(200).json({
@@ -123,6 +127,9 @@ exports.updateTaskById = async (req, res) => {
 
     }catch(error){
         console.log(error)
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }   
         res.status(500).json({
             message: error.message
         })
@@ -135,9 +142,7 @@ exports.deleteTaskById = async (req, res) => {
     try{
         const deleted_task = await Task.findByIdAndDelete(req.params.task_id)
         if(!deleted_task) {
-            return res.status(404).json({
-                message: "Task not found and unable to delete it"
-            })
+            throw new HttpError("Task not found and was not deleted", 404);
         }
         res.status(200).json({
             message: "Task has been deleted successfully",
@@ -145,6 +150,9 @@ exports.deleteTaskById = async (req, res) => {
         })
     }catch(error){
         console.log(error)
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }
         res.status(500).json({
             message: error.message
         })
